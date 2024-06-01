@@ -78,3 +78,4 @@ doc.render(context)
 newFileName = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'])
 
 openDoc(newFileName, myDirs["mqp"])
+
