@@ -34,43 +34,67 @@ context = {
     "std" : "Senior 1",
 }
 
-doc = DocxTemplate(f'{myDirs["tpl"]}/{tpls["SS"]}')
+tpl_name = resource_path(f'{myDirs["tpl"]}/{tpls["SS"]}')
+# doc = DocxTemplate(f'{myDirs["tpl"]}/{tpls["SS"]}')
+doc = DocxTemplate(tpl_name)
 
 csv, part_qs = [], []
-csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_A.csv', 10, 0, 5)
+csv_name = resource_path(f'{myDirs["csv"]}/{context["std"]}/Part_A.csv')
+csv = getPart(csv_name, 10, 0, 2, 5)
 part_qs = getJsonFormat("part_a", "{2}", csv)
 updateObject(context, part_qs)
 
 #TODO: PART B
 
 csv, part_qs = [], []
-csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_C.csv', 10, 1, 1)
+csv_name = resource_path(f'{myDirs["csv"]}/{context["std"]}/Part_C.csv')
+csv = getPart(csv_name, 10, 1, 2, 1)
 part_qs = getJsonFormat("part_c", "{3} ({1} -> {2}) [{0}]", csv)
 updateObject(context, part_qs)
-
+# csv, part_qs = [], []
+# csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_C.csv', 10, 1, 1)
+# part_qs = getJsonFormat("part_c", "{3} ({1} -> {2}) [{0}]", csv)
+# updateObject(context, part_qs)
 
 csv, part_qs = [], []
-csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_D.csv', 6, 1, 1)
+csv_name = resource_path(f'{myDirs["csv"]}/{context["std"]}/Part_D.csv')
+csv = getPart(csv_name, 6, 1, 2, 1)
 part_qs = getJsonFormat("part_d", "{3} ({1} -> {2}) [{0}]", csv)
 updateObject(context, part_qs)
-
+# csv, part_qs = [], []
+# csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_D.csv', 6, 1, 1)
+# part_qs = getJsonFormat("part_d", "{3} ({1} -> {2}) [{0}]", csv)
+# updateObject(context, part_qs)
 
 csv, part_qs = [], []
-csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_E.csv', 3, 1, 1)
+csv_name = resource_path(f'{myDirs["csv"]}/{context["std"]}/Part_E.csv')
+csv = getPart(csv_name, 3, 1, 2, 1)
 part_qs = getJsonFormat("part_e", "{3} ({1} -> {2}) [{0}]", csv)
 updateObject(context, part_qs)
-
+# csv, part_qs = [], []
+# csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_E.csv', 3, 1, 1)
+# part_qs = getJsonFormat("part_e", "{3} ({1} -> {2}) [{0}]", csv)
+# updateObject(context, part_qs)
 
 csv, part_qs = [], []
-csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_F.csv', 2, 1, 1)
+csv_name = resource_path(f'{myDirs["csv"]}/{context["std"]}/Part_F.csv')
+csv = getPart(csv_name, 2, 1, 2, 1)
 part_qs = getJsonFormat("part_f", "{3} ({1} -> {2}) [{0}]", csv)
 updateObject(context, part_qs)
-
+# csv, part_qs = [], []
+# csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_F.csv', 2, 1, 1)
+# part_qs = getJsonFormat("part_f", "{3} ({1} -> {2}) [{0}]", csv)
+# updateObject(context, part_qs)
 
 csv, part_qs = [], []
-csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_G.csv', 1, 1, 1)
+csv_name = resource_path(f'{myDirs["csv"]}/{context["std"]}/Part_G.csv')
+csv = getPart(csv_name, 1, 0, 0, 1)
 part_qs = getJsonFormat("part_g", "{1} [{0}]", csv)
 updateObject(context, part_qs)
+# csv, part_qs = [], []
+# csv = getPart(f'{myDirs["csv"]}/{context["std"]}/Part_G.csv', 1, 1, 1)
+# part_qs = getJsonFormat("part_g", "{1} [{0}]", csv)
+# updateObject(context, part_qs)
 
 
 doc.render(context)

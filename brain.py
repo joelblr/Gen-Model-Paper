@@ -1,5 +1,5 @@
-""" partName: str, freq: int, uniIdx: int, limit: int = 1"""
-def getPart(fileName, freq, uniIdx, limit=1) :
+""" partName: str, freq: int, unique-KeyIndex|ValueIndex: int, limit: int = 1"""
+def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit=1) :
 
     """
     TODO: make unique based on multi-Column
@@ -15,19 +15,19 @@ def getPart(fileName, freq, uniIdx, limit=1) :
         lines = [tuple(line) for line in csv.reader(csvf)]
 
 
-    counter = {line[uniIdx] : 0 for line in lines}
+    counter = {line[uniKeyIdx] : [] for line in lines}
     res = []
     for i in range(freq) :
 
         flag = True
         while flag :
             ques = random.choices(lines[1:])[0]
-            key = ques[uniIdx]
+            key = ques[uniKeyIdx]
 
             # if Chapter Undefined or not Repeated
-            if key == "" or counter[key] < limit :
+            if key == "" or (len(counter[key]) < limit and ques[uniValIdx] not in counter[key]) :
                 res.append(ques)
-                counter[key] += 1
+                counter[key].append(ques[uniValIdx])
                 flag = False
 
     # for i, t in enumerate(res) :
@@ -53,20 +53,23 @@ def getJsonFormat(placeholder_prefix, val_format_type, csv_object) :
     return json_res
 
 
+""" relative_path: str """
+def resource_path(relative_path) :
+    import os, sys
+    try :
+        base_path = sys._MEIPASS
+    except Exception :
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
 """ relative_path: str, prefix_dir: str """
 def openDoc(relative_path, prefix_dir) :
 
-    import os, sys
-    def resource_path(relative_path):
-        try:
-            base_path = sys._MEIPASS
-        except Exception:
-            base_path = os.path.abspath(".")
-
-        return os.path.join(base_path, relative_path)
-
+    import os
     file_path = resource_path(f'{prefix_dir}/{relative_path}')
-    # print(file_path)
+    print(file_path)
 
     if os.path.exists(file_path) :
         if os.name == "nt":  # Windows
