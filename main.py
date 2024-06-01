@@ -10,7 +10,7 @@ from random import randint
 
 # GET as INPUT-GUI
 inputs = {
-    "prefix_tpl" : "model-paper ",
+    "prefix_tpl" : "model-paper",
     "year" : "2025*",
     "saveas" : "",#as a separate dir for the test papers generated per one run
 }
@@ -75,6 +75,6 @@ updateObject(context, part_qs)
 
 doc.render(context)
 
-newFileName = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'])
+newFileName, extn = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'])
 
-openDoc(newFileName, myDirs["mqp"])
+openDoc(newFileName+ extn, myDirs["mqp"])

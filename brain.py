@@ -30,8 +30,8 @@ def getPart(fileName, freq, uniIdx, limit=1) :
                 counter[key] += 1
                 flag = False
 
-    for i, t in enumerate(res) :
-        print(i, t)
+    # for i, t in enumerate(res) :
+    #     print(i, t)
 
     # List[tuple(str, str, str), ]
     return res
@@ -47,17 +47,34 @@ def getJsonFormat(placeholder_prefix, val_format_type, csv_object) :
             val_format_type.format(*row)
         ])
 
-    for key, val in json_res :
-        print(key, val)
+    # for key, val in json_res :
+    #     print(key, val)
 
     return json_res
 
 
-""" newfile: str, prefix_dir: str """
-def openDoc(newfile, prefix_dir) :
-    import os
-    os.system(f'open "{prefix_dir}/{newfile}" &')
-    # os.system("open " + prefix_dir + newfile + " &")
+""" relative_path: str, prefix_dir: str """
+def openDoc(relative_path, prefix_dir) :
+
+    import os, sys
+    def resource_path(relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
+
+    file_path = resource_path(f'{prefix_dir}/{relative_path}')
+    # print(file_path)
+
+    if os.path.exists(file_path) :
+        if os.name == "nt":  # Windows
+            os.startfile(file_path)
+        elif os.name == "posix":  # Linux or macOS
+            os.system("xdg-open " + file_path)
+    else :
+        print("File not found")
 
 
 """ obj: dict(str: str), new_obj: dict(str: str) """
@@ -81,4 +98,4 @@ def saveFile(doc, prefix_dir, prefix_tpl) :
         os.system("mkdir " + prefix_dir)
         doc.save(f'{prefix_dir}/{newfile}')
 
-    return newfile
+    return [newfile_name, newfile_extn]
