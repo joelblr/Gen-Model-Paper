@@ -83,7 +83,7 @@ def updateObject(obj, new_obj) :
         obj[key] = val
 
 
-""" doc: DocxTemplate, prefix_dir: str, dirName: str """
+""" doc: DocxTemplate, prefix_dir: str, dirName: str -> str """
 def saveFile(doc, prefix_dir, prefix_tpl) :
     from datetime import datetime
 
@@ -98,4 +98,4 @@ def saveFile(doc, prefix_dir, prefix_tpl) :
         os.system("mkdir " + prefix_dir)
         doc.save(f'{prefix_dir}/{newfile}')
 
-    return [newfile_name, newfile_extn]
+    return newfile

@@ -75,6 +75,6 @@ updateObject(context, part_qs)
 
 doc.render(context)
 
-newFileName, extn = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'])
+newFileName = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'])
 
-openDoc(newFileName+ extn, myDirs["mqp"])
+openDoc(newFileName, myDirs["mqp"])
