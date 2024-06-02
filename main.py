@@ -23,7 +23,7 @@ while not all(used_ids["done"]) :
 
 
     csv_file, part_qs = [], []
-    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}{context["standard"]}{osc['bs']}Part_A.csv')
+    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_A.csv')
     csv_file = getPart(csv_name, *parts_map[0], 0)
     part_qs = getJsonFormat("part_A", "{3}", csv_file)
     updateObject(context, part_qs)
@@ -31,13 +31,13 @@ while not all(used_ids["done"]) :
     #TODO: PART B
     for i, c in enumerate("CDEF") :
         csv_file, part_qs = [], []
-        csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}{context["standard"]}{osc['bs']}Part_{c}.csv')
+        csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_{c}.csv')
         csv_file = getPart(csv_name, *parts_map[i+2], i+2)
         part_qs = getJsonFormat(f"part_{c}", "{4} ({2} -> {3}) [{1}]", csv_file)
         updateObject(context, part_qs)
 
     csv_file, part_qs = [], []
-    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}{context["standard"]}{osc['bs']}Part_G.csv')
+    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_G.csv')
     csv_file = getPart(csv_name, *parts_map[6], 6)
     part_qs = getJsonFormat("part_G", "{2} [{1}]", csv_file)
     updateObject(context, part_qs)

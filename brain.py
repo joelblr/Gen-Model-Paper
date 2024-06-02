@@ -161,12 +161,13 @@ inputs = {
     "year" : "2025*",
     "standard" : "SENIOR 1",
     "tpl" : "SS_Template.docx",
+    "type" : "main",
     "saveas" : "",#as a separate dir for the test papers generated per one run
 }
 
 myDirs = {
     "pwd" : '.',
-    ".csv" : "data-sets",
+    ".csv" : f"data-sets{osc['bs']}{inputs["standard"]}{osc['bs']}{inputs["type"]}",
     "tpl" : "templates",
     "mqp" : resource_path("model-paper"+osc['bs']+inputs["prefix_tpl"][:-1]),
 }
