@@ -153,7 +153,7 @@ used_ids = {i : set() for i in range(7)}
 used_ids["total"] = [0 for i in range(7)]
 
 used_ids["done"] = [False for i in range(7)]
-used_ids["done"][1] = True  #part_B
+# used_ids["done"][1] = True  #part_B
 
 # # GET as INPUT-GUI
 inputs = {
@@ -174,6 +174,7 @@ myDirs = {
 
 parts_map = {
     0 : (10, 1, 0, 5),
+    1 : (10, 2, 0, 5),
     2 : (10, 2, 0, 1),
     3 : (6, 2, 0, 1),
     4 : (3, 2, 0, 1),
