@@ -59,11 +59,17 @@ def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit, partId) :
 def getJsonFormat(placeholder_prefix, val_format_type, csv_object) :
     json_res = []
 
-    for idx, row in enumerate(csv_object) :
-        json_res.append([
-            f"{placeholder_prefix}{idx+1}",
-            val_format_type.format(*row)
-        ])
+    # for idx, row in enumerate(csv_object) :
+    #     json_res.append([
+    #         f"{placeholder_prefix}{idx+1}",
+    #         val_format_type.format(*row)
+    #     ])
+    for i in range(len(placeholder_prefix)) :
+        for idx, row in enumerate(csv_object) :
+            json_res.append([
+                f"{placeholder_prefix[i]}{idx+1}",
+                val_format_type[i].format(*row)
+            ])
 
     # for key, val in json_res :
     #     print(key, val)
@@ -101,7 +107,7 @@ def resource_path(relative_path) :
 """ relative_path: str, prefix_dir: str """
 def openDoc(relative_path, prefix_dir) :
 
-    file_path = resource_path(f'{prefix_dir}/{relative_path}')
+    file_path = resource_path(rectifiedPath(prefix_dir, relative_path))
     # print(file_path)
 
     if os.path.exists(file_path) :
@@ -117,7 +123,7 @@ def openDoc(relative_path, prefix_dir) :
 def saveFile(doc, folder_path, prefix_tpl) :
 
     newfile = prefix_tpl + datetime.now().strftime("%S%M") + ".docx"
-    newfile = resource_path(folder_path +"/" + newfile)
+    newfile = resource_path(rectifiedPath(folder_path, newfile))
 
     if not os.path.exists(folder_path) :
         if osc["os"] == "nt" :      # Windows
@@ -140,6 +146,11 @@ def open_file_explorer(folder_path) :
     else :
         print("File not found")
 
+
+"""" args: List[str] -> str """
+def rectifiedPath(*args: list[str]) -> str :
+    return osc['bs'].join(args)
+
 #----- CACHE ---------------------------------------
 # os-config
 osc = {}
@@ -157,19 +168,19 @@ used_ids["done"] = [False for i in range(7)]
 
 # # GET as INPUT-GUI
 inputs = {
-    "prefix_tpl" : input("Enter the Folder Name: ")+"-",
+    "prefix_tpl" : input("Enter the Folder Name: ")+"_",
     "year" : "2025*",
     "standard" : "SENIOR 1",
-    "tpl" : "SS_Template.docx",
+    "tpl" : "SS_Template2.docx",
     "type" : "main",
     "saveas" : "",#as a separate dir for the test papers generated per one run
 }
 
 myDirs = {
     "pwd" : '.',
-    ".csv" : f"data-sets{osc['bs']}{inputs["standard"]}{osc['bs']}{inputs["type"]}",
     "tpl" : "templates",
-    "mqp" : resource_path("model-paper"+osc['bs']+inputs["prefix_tpl"][:-1]),
+    ".csv" : resource_path(rectifiedPath("data-sets", inputs["standard"], inputs["type"])),
+    "mqp" : resource_path(rectifiedPath("model-paper", inputs["prefix_tpl"][:-1])),
 }
 
 parts_map = {

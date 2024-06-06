@@ -18,33 +18,34 @@ while not all(used_ids["done"]) :
         "standard" : inputs['standard'],
     }
 
-    tpl_name = resource_path(f'{myDirs["tpl"]}{osc['bs']}{inputs["tpl"]}')
+    tpl_name = resource_path(rectifiedPath(myDirs["tpl"], inputs["tpl"]))
     doc = DocxTemplate(tpl_name)
 
 
     csv_file, part_qs = [], []
-    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_A.csv')
+    csv_name = resource_path(rectifiedPath(myDirs[".csv"], 'Part_A.csv'))
     csv_file = getPart(csv_name, *parts_map[0], 0)
-    part_qs = getJsonFormat("part_A", "{3}", csv_file)
+    part_qs = getJsonFormat(["part_A"], ["{3}"], csv_file)
     updateObject(context, part_qs)
 
     csv_file, part_qs = [], []
-    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_B.csv')
+    csv_name = resource_path(rectifiedPath(myDirs[".csv"], 'Part_B2.csv'))
     csv_file = getPart(csv_name, *parts_map[1], 1)
-    part_qs = getJsonFormat(f"part_B", "[{1}] ({2} -> {3}) {4}", csv_file)
+    part_qs = getJsonFormat(["part_B", "part_B1"], ["{4} ({2} -> {3}) [{1}]", "{5}"], csv_file)
     updateObject(context, part_qs)
+
 
     for i, c in enumerate("CDEF") :
         csv_file, part_qs = [], []
-        csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_{c}.csv')
+        csv_name = resource_path(rectifiedPath(myDirs[".csv"], f'Part_{c}.csv'))
         csv_file = getPart(csv_name, *parts_map[i+2], i+2)
-        part_qs = getJsonFormat(f"part_{c}", "{4} ({2} -> {3}) [{1}]", csv_file)
+        part_qs = getJsonFormat([f"part_{c}"], ["{4} ({2} -> {3}) [{1}]"], csv_file)
         updateObject(context, part_qs)
 
     csv_file, part_qs = [], []
-    csv_name = resource_path(f'{myDirs[".csv"]}{osc['bs']}Part_G.csv')
+    csv_name = resource_path(rectifiedPath(myDirs[".csv"], 'Part_G.csv'))
     csv_file = getPart(csv_name, *parts_map[6], 6)
-    part_qs = getJsonFormat("part_G", "{2} [{1}]", csv_file)
+    part_qs = getJsonFormat(["part_G"], ["{2} [{1}]"], csv_file)
     updateObject(context, part_qs)
 
 
