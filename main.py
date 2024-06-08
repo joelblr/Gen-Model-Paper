@@ -51,7 +51,7 @@ while not all(used_ids["done"]) :
 
     doc.render(context)
 
-    newFileName = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'] + f"{pre_idx}_")
+    newFileName = saveFile(doc, myDirs["mqp"], inputs['prefix_tpl'] + f"{pre_idx}")
 
     # openDoc(newFileName, myDirs["mqp"])
     pre_idx += 1

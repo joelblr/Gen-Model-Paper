@@ -122,7 +122,8 @@ def openDoc(relative_path, prefix_dir) :
 """ doc: DocxTemplate, folder_path: str, prefix_tpl: str -> str """
 def saveFile(doc, folder_path, prefix_tpl) :
 
-    newfile = prefix_tpl + datetime.now().strftime("%S%M") + ".docx"
+    # newfile = prefix_tpl + datetime.now().strftime("%S%M") + ".docx"
+    newfile = prefix_tpl + ".docx"
     newfile = resource_path(rectifiedPath(folder_path, newfile))
 
     if not os.path.exists(folder_path) :
