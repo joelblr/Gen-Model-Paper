@@ -3,6 +3,16 @@ import csv, random
 from datetime import datetime
 
 
+def findChapterFreq(files) :
+    #FIXME: use caching, as this will be done again n again.
+    # chapter_freq = {}
+    # for row in lines :
+    #     tot_chap[row[]]
+    pass
+
+
+
+
 """ partName: str, freq: int, unique-KeyIndex|ValueIndex: int, limit: int = 1"""
 def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit, partId) :
 
@@ -18,7 +28,7 @@ def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit, partId) :
         lines = [tuple(line) for line in csv.reader(csvf)]
 
     used_ids["total"][partId] = len(lines)-1
-    counter = {line[uniKeyIdx] : [] for line in lines}
+    cur_used_ids = {line[uniKeyIdx] : [] for line in lines}
     res = []
     for i in range(freq) :
 
@@ -29,8 +39,8 @@ def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit, partId) :
             key1 = ques[uniKeyIdx]
             key2 = ques[uniValIdx]
 
-            if (len(counter[key1]) >= limit) :
-                counter[key1] = []
+            if (len(cur_used_ids[key1]) >= limit) :
+                cur_used_ids[key1] = []
 
             if (len(used_ids[partId]) == used_ids["total"][partId]) :
                 used_ids[partId] = set()
@@ -39,7 +49,7 @@ def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit, partId) :
             if (key2 not in used_ids[partId]) :
                 res.append(ques)
                 used_ids[partId].add(key2)
-                counter[key1].append(key2)
+                cur_used_ids[key1].append(key2)
                 flag = False
 
     # for i, t in enumerate(res) :
