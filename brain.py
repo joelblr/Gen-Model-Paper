@@ -1,8 +1,9 @@
 import os, sys
 import csv, random
 from datetime import datetime
+from typing import Any
 
-
+#XXX
 def findChapterFreq(files) :
     #FIXME: use caching, as this will be done again n again.
     # chapter_freq = {}
@@ -12,7 +13,7 @@ def findChapterFreq(files) :
 
 
 
-
+#TODO: Fix the Logic of Uniq-city
 """ partName: str, freq: int, unique-KeyIndex|ValueIndex: int, limit: int = 1"""
 def getPart(fileName, freq, uniKeyIdx, uniValIdx, limit, partId) :
 
@@ -159,17 +160,17 @@ def open_file_explorer(folder_path) :
 
 
 """" args: List[str] -> str """
-def rectifiedPath(*args: list[str]) -> str :
+def rectifiedPath(*args: str) -> str :
     return osc['bs'].join(args)
 
 #----- CACHE ---------------------------------------
 # os-config
-osc = {}
+osc: dict[str, str] = {}
 getOsDetails()
 
 
 # contains set of used-IDs for a given Section/Part A->0, B->1... G->6
-used_ids = {i : set() for i in range(7)}
+used_ids: dict[Any, Any] = {i : set() for i in range(7)}
 
 # total Qs in each part
 used_ids["total"] = [0 for i in range(7)]

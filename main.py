@@ -2,8 +2,7 @@
 TODO: Run a While-Infinite Loop, Cache all used Qs to form N Unique papers
 """
 
-# from docx import Document
-from docxtpl import DocxTemplate
+from docxtpl import DocxTemplate # type: ignore
 from brain import *
 from random import randint
 
